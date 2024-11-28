@@ -12,11 +12,18 @@ class ClassVisualizer:
     def parse_class(self) -> Dict:
         with open(self.file_path, 'r') as file:
             tree = ast.parse(file.read())
-            
+        
+        # imports
+
+        # classes
         for node in ast.walk(tree):
-            if isinstance(node, ast.ClassDef) and node.name == "Tool":
+            if isinstance(node, ast.ClassDef):
                 return self._extract_class_info(node)
         return {}
+    
+        # functions
+
+        # others
     
     def _extract_class_info(self, node: ast.ClassDef) -> Dict:
         class_info = {
@@ -102,5 +109,5 @@ class ClassVisualizer:
         tree.bind('<Double-1>', show_docstring)
 
 
-visualizer = ClassVisualizer('../ads-deluge-frome/flood_tool/tool.py')
+visualizer = ClassVisualizer('../ads-deluge-frome/flood_tool/Tool.py')
 visualizer.create_visualization()
